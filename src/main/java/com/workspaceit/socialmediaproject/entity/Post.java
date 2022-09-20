@@ -1,9 +1,6 @@
 package com.workspaceit.socialmediaproject.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "post_table")
 public class Post {
@@ -13,6 +10,16 @@ public class Post {
     private String description;
     private int upvotes;
     private int downvotes;
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
