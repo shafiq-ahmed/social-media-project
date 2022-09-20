@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/post/{userId}")
 public class PostController {
@@ -32,5 +35,17 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
         }
 
+    }
+
+    @GetMapping("/posts")
+    public ModelAndView viewPosts(@PathVariable int userId){
+        ModelAndView allPostsByUser= new ModelAndView();
+        allPostsByUser.setViewName("posts");
+        allPostsByUser.addObject("allPosts", postService.getAllPostsFromUser(userId));
+        return allPostsByUser;
+//        List<String> s= new ArrayList<>();
+//        ModelAndView allPosts= new ModelAndView();
+//        allPosts.addObject("allposts", s );
+//        return allPosts;
     }
 }

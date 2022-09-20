@@ -7,6 +7,8 @@ import com.workspaceit.socialmediaproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
     @Autowired
@@ -25,5 +27,9 @@ public class PostService {
         if(userDao.existsById(userId))
             return true;
         else return false;
+    }
+    public List<Post> getAllPostsFromUser(int userId){
+         return postDao.findByUser_Id(userId);
+        //posts.forEach(i-> System.out.println(i.getDescription()));
     }
 }

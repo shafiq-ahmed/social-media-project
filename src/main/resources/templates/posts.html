@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/posts.css}">
+    <title>Title</title>
+</head>
+<body>
+<div id="app" th:each="post: ${allPosts}">
+
+    <div class="main-info" >
+        <span class="name" th:text="${post.id} "></span>
+        <h3 th:text="${post.description}"></h3>
+    </div>
+    <hr>
+
+
+</div>
+
+
+</body>
+</html>
