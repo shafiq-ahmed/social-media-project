@@ -42,6 +42,7 @@ public class PostController {
         ModelAndView allPostsByUser= new ModelAndView();
         allPostsByUser.setViewName("posts");
         allPostsByUser.addObject("allPosts", postService.getAllPostsFromUser(userId));
+        allPostsByUser.addObject("userId",userId);
         return allPostsByUser;
 //        List<String> s= new ArrayList<>();
 //        ModelAndView allPosts= new ModelAndView();

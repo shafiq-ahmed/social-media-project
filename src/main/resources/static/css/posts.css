@@ -90,3 +90,19 @@ input {
 .post-comment {
   margin: 0 0 5px 0;
 }
+
+
+button {
+  padding: 10px 25px 10px 25px;
+  color: #FFF;
+  background-color: #4bc970;
+  font-size: 14px;
+  text-align: center;
+  font-style: normal;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid #3ac162;
+  border-width: 1px 1px 3px;
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+  margin-bottom: 2px;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/createpost.css}">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <form id="contact" method="post">
+        <h3>Write Comment</h3>
+        <fieldset>
+            <textarea  name="description" tabindex="5" required></textarea>
+        </fieldset>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" >Post Comment</button>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
