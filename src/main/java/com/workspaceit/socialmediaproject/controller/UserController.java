@@ -36,7 +36,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/login/validation")
+    @PostMapping("/login/validation")
     public ResponseEntity loginValidation(User user){
 
         User validatedUser=userService.validateLogin(user);

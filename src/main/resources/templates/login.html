@@ -9,7 +9,7 @@
     <div class="login-page">
         <div class="form">
 
-            <form class="login-form" th:action="@{/user/login/validation}" th:object="${user}">
+            <form class="login-form" th:action="@{/user/login/validation}" th:object="${user}" method="post">
                 <input type="text" placeholder="UserId" name="id"/>
                 <input type="password" placeholder="password" name="password"/>
                 <button>login</button>
