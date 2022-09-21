@@ -9,7 +9,7 @@
 <div id="app" th:each="comment: ${allComments}">
 
   <div class="main-info" >
-    <span class="name" th:text="${comment.id} "></span>
+    <span class="name" th:text="${comment.user.name} "></span>
     <h3 th:text="${comment.description}"></h3>
 
   </div>

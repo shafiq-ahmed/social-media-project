@@ -9,7 +9,7 @@
 <div id="app" th:each="post: ${allPosts}">
 
     <div class="main-info" >
-        <span class="name" th:text="${post.id} "></span>
+        <span class="name" th:text="${post.user.name} "></span>
         <h3 th:text="${post.description}"></h3>
         <form th:action="@{/comment/{postId}/{userId}(userId=${#strings.toString(viewerId)}, postId=${#strings.toString(post.id)})}"  method="get">
          <button type="submit">Write Comment</button>
