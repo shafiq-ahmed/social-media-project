@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController()
 @RequestMapping(value = "/comment")
 public class CommentController {
@@ -27,11 +29,21 @@ public class CommentController {
 
     @PostMapping("/{postId}/{userId}/create")
     public ResponseEntity createComment(@PathVariable int postId, @PathVariable int userId, Comment comment){
-        
+
         commentService.addComment(comment,postId,userId);
         //commentService.addComment(comment,Integer.parseInt(postId),Integer.parseInt(userId));
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Comment posted");
+    }
+
+    @GetMapping("/{postId}/allComments")
+    public ModelAndView getAllCommentsForPost(@PathVariable int postId){
+        ModelAndView allComments=new ModelAndView();
+        allComments.addObject("allComments",commentService.findAllCommentsInPost(postId));
+        allComments.setViewName("allcomments");
+        return allComments;
+
+
     }
 }

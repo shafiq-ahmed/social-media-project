@@ -9,6 +9,8 @@ import com.workspaceit.socialmediaproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentService {
     @Autowired
@@ -30,5 +32,9 @@ public class CommentService {
 
     public User findUser(int userId){
         return userDao.getReferenceById(userId);
+    }
+
+    public List<Comment> findAllCommentsInPost(int postId){
+        return commentDao.findByPost_Id(postId);
     }
 }
