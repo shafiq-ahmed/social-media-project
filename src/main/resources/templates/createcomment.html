@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <form id="contact" method="post">
+    <form id="contact" th:action="@{/comment/{postId}/{userId}/create(postId=${#strings.toString(postId)},userId=${#strings.toString(userId)})}" method="post">
         <h3>Write Comment</h3>
         <fieldset>
             <textarea  name="description" tabindex="5" required></textarea>
