@@ -7,7 +7,6 @@
   background: #212222;
   color: #fff;
   letter-spacing: 0.04em;
-  text-align: center;
   margin: 60px;
   width: 370px;
   margin: 0 auto;
@@ -46,11 +45,8 @@ h3 {
   padding: 10px 20px;
   text-align: left;
   margin-bottom: 15px;
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+  display:inline-block;
+
 }
 
 li {
@@ -93,16 +89,40 @@ input {
 
 
 button {
-  padding: 10px 25px 10px 25px;
+  padding: 5px 15px 5px 15px;
   color: #FFF;
   background-color: #4bc970;
   font-size: 14px;
-  text-align: center;
   font-style: normal;
   border-radius: 5px;
-  width: 100%;
+  width: 50%;
   border: 1px solid #3ac162;
   border-width: 1px 1px 3px;
   box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
-  margin-bottom: 2px;
+  margin: 0 auto;
+  cursor: pointer; /* Pointer/hand icon */
+  float: left;
+  display:inline-block;
+}
+.btn-group button {
+  background-color: #04AA6D; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  display:inline-block;
+}
+
+/* Clear floats (clearfix hack) */
+
+
+
+/* Add a background color on hover *//*
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+*/
+button:focus{
+background-color: #3e8e41;
 }
