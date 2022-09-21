@@ -19,7 +19,7 @@
             <button type="submit">View Comments</button>
         </form>
         <div class="btn-group">
-            <form th:action="@{/reaction/upvote}" method="post">
+            <form th:action="@{/reaction/upvote/{postId}/{userId}(postId=${#strings.toString(post.id)},userId=${#strings.toString(viewerId)})}" method="post">
                 <input type="hidden"  name="url" th:value="@{__${#httpServletRequest.requestURL}__}">
                 <button type="submit">Upvote</button>
             </form>
