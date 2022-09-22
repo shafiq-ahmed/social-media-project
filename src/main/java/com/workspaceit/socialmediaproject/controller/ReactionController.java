@@ -16,8 +16,15 @@ public class ReactionController {
     private ReactionService reactionService;
     @PostMapping("/upvote/{postId}/{userId}")
     public ModelAndView setUpvote(@PathVariable int postId, @PathVariable int userId, String url){
-        System.out.println(url+" "+postId+" "+userId);
+
         reactionService.setUpvote(postId,userId);
+        return new ModelAndView("redirect:" + url);
+    }
+
+    @PostMapping("/downvote/{postId}/{userId}")
+    public ModelAndView setDownvote(@PathVariable int postId, @PathVariable int userId, String url){
+
+        reactionService.setDownvote(postId,userId);
         return new ModelAndView("redirect:" + url);
     }
 }

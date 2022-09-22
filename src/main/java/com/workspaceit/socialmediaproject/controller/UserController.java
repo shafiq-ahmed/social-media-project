@@ -24,9 +24,11 @@ public class UserController {
     }
 
     @PostMapping (value = "/register",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public void addUser( User user){
+    public ResponseEntity addUser( User user){
        // System.out.println(user);
         userService.addUser(user);
+        return ResponseEntity.status(200).body("User registered");
+
     }
 
     @GetMapping("/login")

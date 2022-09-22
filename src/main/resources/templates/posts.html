@@ -20,11 +20,11 @@
         </form>
         <div class="btn-group">
             <form th:action="@{/reaction/upvote/{postId}/{userId}(postId=${#strings.toString(post.id)},userId=${#strings.toString(viewerId)})}" method="post">
-                <input type="hidden"  name="url" th:value="@{__${#httpServletRequest.requestURL}__}">
+                <input class="zero" type="hidden"  name="url" th:value="@{__${#httpServletRequest.requestURL}__}">
                 <button type="submit">Upvote</button>
             </form>
-            <form th:action="@{/reaction/downvote}" method="post">
-                <input type="hidden"  name="url" th:value="@{__${#httpServletRequest.requestURL}__}">
+            <form th:action="@{/reaction/downvote/{postId}/{userId}(postId=${#strings.toString(post.id)},userId=${#strings.toString(viewerId)})}" method="post">
+                <input class="zero" type="hidden"  name="url" th:value="@{__${#httpServletRequest.requestURL}__}">
                 <button type="submit">Downvote</button>
             </form>
         </div>

@@ -19,12 +19,48 @@ public class ReactionService {
 
     public void setUpvote(int postId, int userId){
         System.out.println("here");
-        Reaction reaction=new Reaction();
-        reaction.setPost(postDao.getReferenceById(postId));
-        reaction.setUser(userDao.getReferenceById(userId));
-        reaction.setUserReact(UserReact.UPVOTE);
+        Reaction reaction=reactionDao.findByPostIdAndUserId(postId,userId);
+        if(reaction!=null){
+
+            if(reaction.getUserReact()==UserReact.UPVOTE){
+                reaction.setUserReact(UserReact.NONE);
+            }else reaction.setUserReact(UserReact.UPVOTE);
+
+
+
+        }else{
+            reaction=new Reaction();
+            reaction.setPost(postDao.getReferenceById(postId));
+            reaction.setUser(userDao.getReferenceById(userId));
+            reaction.setUserReact(UserReact.UPVOTE);
+        }
         reactionDao.save(reaction);
-//        Reaction reaction=reactionDao.findByPostId_UserId(postId,userId);
+//
+
+//        System.out.println(reaction.getPost().getId());
+//        System.out.println(reaction.getUser().getId());
+    }
+
+    public void setDownvote(int postId, int userId){
+        System.out.println("here");
+        Reaction reaction=reactionDao.findByPostIdAndUserId(postId,userId);
+        if(reaction!=null){
+
+            if(reaction.getUserReact()==UserReact.DOWNVOTE){
+                reaction.setUserReact(UserReact.NONE);
+            }else reaction.setUserReact(UserReact.DOWNVOTE);
+
+
+
+        }else{
+            reaction=new Reaction();
+            reaction.setPost(postDao.getReferenceById(postId));
+            reaction.setUser(userDao.getReferenceById(userId));
+            reaction.setUserReact(UserReact.DOWNVOTE);
+        }
+        reactionDao.save(reaction);
+//
+
 //        System.out.println(reaction.getPost().getId());
 //        System.out.println(reaction.getUser().getId());
     }
