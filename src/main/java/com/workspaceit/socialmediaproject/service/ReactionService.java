@@ -18,50 +18,38 @@ public class ReactionService {
     private UserDao userDao;
 
     public void setUpvote(int postId, int userId){
-        System.out.println("here");
         Reaction reaction=reactionDao.findByPostIdAndUserId(postId,userId);
-        if(reaction!=null){
 
-            if(reaction.getUserReact()==UserReact.UPVOTE){
-                reaction.setUserReact(UserReact.NONE);
-            }else reaction.setUserReact(UserReact.UPVOTE);
-
-
-
-        }else{
-            reaction=new Reaction();
-            reaction.setPost(postDao.getReferenceById(postId));
-            reaction.setUser(userDao.getReferenceById(userId));
-            reaction.setUserReact(UserReact.UPVOTE);
+        if(reaction==null){
+            reaction=createReact(postId,userId);
         }
-        reactionDao.save(reaction);
-//
 
-//        System.out.println(reaction.getPost().getId());
-//        System.out.println(reaction.getUser().getId());
+        if(reaction.getUserReact()==UserReact.UPVOTE){
+            reaction.setUserReact(UserReact.NONE);
+        }else reaction.setUserReact(UserReact.UPVOTE);
+
+        reactionDao.save(reaction);
     }
 
     public void setDownvote(int postId, int userId){
-        System.out.println("here");
         Reaction reaction=reactionDao.findByPostIdAndUserId(postId,userId);
-        if(reaction!=null){
-
-            if(reaction.getUserReact()==UserReact.DOWNVOTE){
-                reaction.setUserReact(UserReact.NONE);
-            }else reaction.setUserReact(UserReact.DOWNVOTE);
-
-
-
-        }else{
-            reaction=new Reaction();
-            reaction.setPost(postDao.getReferenceById(postId));
-            reaction.setUser(userDao.getReferenceById(userId));
-            reaction.setUserReact(UserReact.DOWNVOTE);
+        if(reaction==null){
+            reaction=createReact(postId,userId);
         }
-        reactionDao.save(reaction);
-//
 
-//        System.out.println(reaction.getPost().getId());
-//        System.out.println(reaction.getUser().getId());
+        if(reaction.getUserReact()==UserReact.DOWNVOTE){
+            reaction.setUserReact(UserReact.NONE);
+        }else reaction.setUserReact(UserReact.DOWNVOTE);
+
+        reactionDao.save(reaction);
+    }
+
+    public Reaction createReact(int postId, int userId){
+        Reaction reaction=new Reaction();
+        reaction.setPost(postDao.getReferenceById(postId));
+        reaction.setUser(userDao.getReferenceById(userId));
+        reaction.setUserReact(UserReact.NONE);
+
+        return  reaction;
     }
 }
