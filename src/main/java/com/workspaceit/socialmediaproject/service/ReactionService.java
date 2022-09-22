@@ -23,7 +23,9 @@ public class ReactionService {
         if(reaction==null){
             reaction=createReact(postId,userId);
         }
-
+        if(reaction.getUser().getId()==reaction.getPost().getUser().getId()){
+            return;
+        }
         if(reaction.getUserReact()==UserReact.UPVOTE){
             reaction.setUserReact(UserReact.NONE);
         }else reaction.setUserReact(UserReact.UPVOTE);
@@ -36,7 +38,9 @@ public class ReactionService {
         if(reaction==null){
             reaction=createReact(postId,userId);
         }
-
+        if(reaction.getUser().getId()==reaction.getPost().getUser().getId()){
+            return;
+        }
         if(reaction.getUserReact()==UserReact.DOWNVOTE){
             reaction.setUserReact(UserReact.NONE);
         }else reaction.setUserReact(UserReact.DOWNVOTE);

@@ -39,18 +39,18 @@ public class UserController {
     }
 
     @PostMapping("/login/validation")
-    public ResponseEntity loginValidation(User user){
+    public ModelAndView loginValidation(User user){
 
         User validatedUser=userService.validateLogin(user);
+        ModelAndView postView;
         if(validatedUser==null){
-            return ResponseEntity
-                    .status(HttpStatus.UNAUTHORIZED)
-                    .body("User id or password does not match");
-        }else{
-            return ResponseEntity
-                    .status(HttpStatus.ACCEPTED)
-                    .body(validatedUser);
-        }
 
+            postView= new ModelAndView("redirect:" +"http://localhost:9090/user/login");
+
+        }else{
+           postView= new ModelAndView("redirect:" +"http://localhost:9090/post/"+user.getId()+"/posts/"+user.getId());
+
+        }
+        return postView;
     }
 }
