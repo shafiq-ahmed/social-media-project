@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,17 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
     private UserService userService;
-    @GetMapping("/")
-    public ModelAndView home(){
+    @GetMapping("/register")
+    public ModelAndView register(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("registrationForm");
         return modelAndView;
     }
 
-    @PostMapping (value = "/register",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping (value = "/addUser",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity addUser( User user){
        // System.out.println(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addUser(user);
         return ResponseEntity.status(200).body("User registered");
 
