@@ -16,6 +16,10 @@
         <form class="login-form" th:action="@{/post/{userId}/posts/{viewerId}(userId=${userId},viewerId=${userId})}"  method="get">
             <button>View Posts</button>
         </form>
+        <br>
+        <form class="login-form" th:action="@{/logout}"  method="get">
+            <button>Logout</button>
+        </form>
 
     </div>
 </div>
