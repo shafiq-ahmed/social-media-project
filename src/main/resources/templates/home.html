@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"  th:href="@{/css/login.css}">
+    <title>Title</title>
+</head>
+<body>
+<div class="login-page">
+    <div class="form">
+
+        <form class="login-form" th:action="@{/post/{userId}/createpost(userId=${userId})}"  method="get">
+            <button>Write Post</button>
+        </form>
+        <br>
+        <form class="login-form" th:action="@{/post/{userId}/posts/{viewerId}(userId=${userId},viewerId=${userId})}"  method="get">
+            <button>View Posts</button>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

@@ -48,9 +48,17 @@ public class UserController {
             postView= new ModelAndView("redirect:" +"http://localhost:9090/user/login");
 
         }else{
-           postView= new ModelAndView("redirect:" +"http://localhost:9090/post/"+user.getId()+"/posts/"+user.getId());
+           postView= new ModelAndView("redirect:" +"http://localhost:9090/user/"+user.getId()+"/home");
 
         }
         return postView;
+    }
+
+    @GetMapping("/{userId}/home")
+    public ModelAndView getHome(@PathVariable int userId){
+        ModelAndView homeView= new ModelAndView();
+        homeView.addObject("userId",userId);
+        homeView.setViewName("home");
+        return homeView;
     }
 }
