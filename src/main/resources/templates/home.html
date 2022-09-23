@@ -6,9 +6,23 @@
     <title>Title</title>
 </head>
 <body>
+
+
 <div class="login-page">
+
+
     <div class="form">
 
+
+        <span class="custom-dropdown big">
+            <select>
+                <option>Sherlock Holmes</option>
+                <option>The Great Gatsby</option>
+                <option>V for Vendetta</option>
+                <option>The Wolf of Wallstreet</option>
+                <option>Quantum of Solace</option>
+            </select>
+        </span>
         <form class="login-form" th:action="@{/post/{userId}/createpost(userId=${userId})}"  method="get">
             <button>Write Post</button>
         </form>
