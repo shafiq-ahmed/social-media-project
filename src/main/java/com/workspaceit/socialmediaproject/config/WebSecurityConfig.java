@@ -44,14 +44,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().antMatchers("/user/**").authenticated()
-                .antMatchers("/post/**").authenticated()
-                .antMatchers("/comment/**").authenticated()
-                .antMatchers("/reaction/**").authenticated()
+        http.authorizeHttpRequests()
                 .antMatchers("/user/login").permitAll()
                 .antMatchers("/user/login/validation").permitAll()
                 .antMatchers("/user/register").permitAll()
                 .antMatchers("/user/addUser").permitAll()
-                .and().formLogin();
+                .antMatchers("/user/**").authenticated()
+                .antMatchers("/post/**").authenticated()
+                .antMatchers("/comment/**").authenticated()
+                .antMatchers("/reaction/**").authenticated()
+                .and().formLogin().defaultSuccessUrl("/user/login/validation");
+
     }
 }

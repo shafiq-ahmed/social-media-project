@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,19 +44,18 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("/login/validation")
-    public ModelAndView loginValidation(User user){
+    @GetMapping("/login/validation")
+    public ModelAndView loginValidation(){
 
-        User validatedUser=userService.validateLogin(user);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+
+
         ModelAndView postView;
-        if(validatedUser==null){
 
-            postView= new ModelAndView("redirect:" +"http://localhost:9090/user/login");
+        postView= new ModelAndView("redirect:" +"http://localhost:9090/user/"+userId+"/home");
 
-        }else{
-           postView= new ModelAndView("redirect:" +"http://localhost:9090/user/"+user.getId()+"/home");
 
-        }
         return postView;
     }
 
