@@ -29,13 +29,13 @@ public class PostController {
         return postView;
     }
     @PostMapping("/submit")
-    public ResponseEntity submitPost(Post post,@PathVariable("userId") int userId ){
+    public ModelAndView submitPost(Post post,@PathVariable("userId") int userId ){
 
         if(postService.postUserExists(userId)){
             postService.addPost(post, userId);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Post created");
+            return new ModelAndView("redirect:"+"http://localhost://9090/post/"+userId+"/posts/"+userId);
         }else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
+            return new ModelAndView("error").addObject("errorMessage","User not found");
         }
 
     }
@@ -54,7 +54,7 @@ public class PostController {
 //        return allPosts;
     }
 
-    @GetMapping("/viewUser")
+    @GetMapping("/viewUserProfile")
     public ModelAndView getSelectedUserPost(@PathVariable("userId") int userId,int selectedUserId){
         ModelAndView postView= new ModelAndView("redirect:" +"http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
         return postView;

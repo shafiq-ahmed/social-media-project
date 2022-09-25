@@ -15,7 +15,7 @@
 
 
         <span class="custom-dropdown big">
-            <form name="userSelect" th:action="@{/post/{userId}/viewUser(userId=${userId})}">
+            <form name="userSelect" th:action="@{/post/{userId}/viewUserProfile(userId=${userId})}">
                 <select th:onchange="userSelect.submit()" name="selectedUserId">
                     <option disabled>Select a user..</option>
                     <option th:each="user:${userList}" th:value="${user.id}" th:text="${user.name}"></option>

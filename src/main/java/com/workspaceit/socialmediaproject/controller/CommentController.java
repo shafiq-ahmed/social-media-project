@@ -28,13 +28,13 @@ public class CommentController {
     }
 
     @PostMapping("/{postId}/{userId}/create")
-    public ResponseEntity createComment(@PathVariable int postId, @PathVariable int userId, Comment comment){
+    public ModelAndView createComment(@PathVariable int postId, @PathVariable int userId, Comment comment){
 
         commentService.addComment(comment,postId,userId);
         //commentService.addComment(comment,Integer.parseInt(postId),Integer.parseInt(userId));
 
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Comment posted");
+        return new ModelAndView("redirect:" +"http://localhost:9090/comment/"+postId+"/allComments");
     }
 
     @GetMapping("/{postId}/allComments")
