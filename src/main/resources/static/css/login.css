@@ -113,6 +113,7 @@ body {
   display: inline-block;
   vertical-align: middle;
   margin: 10px; /* demo only */
+  width: 100%;
 }
 
 .custom-dropdown select {

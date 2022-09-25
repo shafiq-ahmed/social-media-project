@@ -63,6 +63,7 @@ public class UserController {
     public ModelAndView getHome(@PathVariable int userId){
         ModelAndView homeView= new ModelAndView();
         homeView.addObject("userId",userId);
+        homeView.addObject("userList",userService.getAllUsers());
         homeView.setViewName("home");
         return homeView;
     }

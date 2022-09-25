@@ -15,13 +15,12 @@
 
 
         <span class="custom-dropdown big">
-            <select>
-                <option>Sherlock Holmes</option>
-                <option>The Great Gatsby</option>
-                <option>V for Vendetta</option>
-                <option>The Wolf of Wallstreet</option>
-                <option>Quantum of Solace</option>
-            </select>
+            <form name="userSelect" th:action="@{/post/{userId}/viewUser(userId=${userId})}">
+                <select th:onchange="userSelect.submit()" name="selectedUserId">
+                    <option disabled>Select a user..</option>
+                    <option th:each="user:${userList}" th:value="${user.id}" th:text="${user.name}"></option>
+                </select>
+            </form>
         </span>
         <form class="login-form" th:action="@{/post/{userId}/createpost(userId=${userId})}"  method="get">
             <button>Write Post</button>

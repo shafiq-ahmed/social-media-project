@@ -53,4 +53,10 @@ public class PostController {
 //        allPosts.addObject("allposts", s );
 //        return allPosts;
     }
+
+    @GetMapping("/viewUser")
+    public ModelAndView getSelectedUserPost(@PathVariable("userId") int userId,int selectedUserId){
+        ModelAndView postView= new ModelAndView("redirect:" +"http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
+        return postView;
+    }
 }
