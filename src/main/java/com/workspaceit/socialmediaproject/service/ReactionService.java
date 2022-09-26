@@ -23,6 +23,7 @@ public class ReactionService {
         if(reaction==null){
             reaction=createReact(postId,userId);
         }
+        //no action if poster tries to upvote on own post
         if(reaction.getUser().getId()==reaction.getPost().getUser().getId()){
             return;
         }
@@ -38,6 +39,7 @@ public class ReactionService {
         if(reaction==null){
             reaction=createReact(postId,userId);
         }
+        //no action if poster tries to downvote on own post
         if(reaction.getUser().getId()==reaction.getPost().getUser().getId()){
             return;
         }

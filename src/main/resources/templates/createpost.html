@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="container">
-        <form id="contact" th:action="@{/post/{userId}/submit(userId=${#strings.toString(userId)})}" method="post">
+        <form id="contact" th:action="@{/post/{userId}/submit(userId=${userId})}" method="post">
             <h3>Create Post</h3>
             <fieldset>
                 <textarea  name="description" tabindex="5" required></textarea>

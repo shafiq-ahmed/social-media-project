@@ -29,7 +29,6 @@ public class PostService {
         else return false;
     }
     public List<Post> getAllPostsFromUser(int userId){
-         return postDao.findByUser_Id(userId);
-        //posts.forEach(i-> System.out.println(i.getDescription()));
+         return postDao.findByUserId(userId);
     }
 }

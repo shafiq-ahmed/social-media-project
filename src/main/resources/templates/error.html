@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>There was an error processing your request</h1>
-<h2 th:text="${errorMessage}"></h2>
+<h2 >
+<span th:text="${errorMessage}" th:remove="tag">title</span>
+</h2>
 </body>
 </html>

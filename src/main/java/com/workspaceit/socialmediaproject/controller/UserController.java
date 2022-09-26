@@ -3,8 +3,6 @@ package com.workspaceit.socialmediaproject.controller;
 import com.workspaceit.socialmediaproject.entity.User;
 import com.workspaceit.socialmediaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,34 +26,22 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping (value = "/addUser",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping (value = "/addUser")
     public ResponseEntity addUser( User user){
-       // System.out.println(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addUser(user);
         return ResponseEntity.status(200).body("User registered");
 
     }
 
-//    @GetMapping("/login")
-//    public ModelAndView login(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("login");
-//        return modelAndView;
-//    }
-
     @GetMapping("/login/validation")
     public ModelAndView loginValidation(){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
-
-
         ModelAndView postView;
 
         postView= new ModelAndView("redirect:" +"http://localhost:9090/user/"+userId+"/home");
-
-
         return postView;
     }
 

@@ -1,20 +1,14 @@
 package com.workspaceit.socialmediaproject.controller;
 
 import com.workspaceit.socialmediaproject.entity.Post;
-import com.workspaceit.socialmediaproject.entity.User;
 import com.workspaceit.socialmediaproject.service.CommentService;
 import com.workspaceit.socialmediaproject.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
-@RequestMapping(value = "/post/{userId}")
+@RequestMapping("/post/{userId}")
 public class PostController {
     @Autowired
     private PostService postService;
@@ -33,7 +27,7 @@ public class PostController {
 
         if(postService.postUserExists(userId)){
             postService.addPost(post, userId);
-            return new ModelAndView("redirect:"+"http://localhost://9090/post/"+userId+"/posts/"+userId);
+            return new ModelAndView("redirect:"+"http://localhost:9090/post/"+userId+"/posts/"+userId);
         }else{
             return new ModelAndView("error").addObject("errorMessage","User not found");
         }
@@ -48,10 +42,6 @@ public class PostController {
         allPostsByUser.addObject("userId",userId);
         allPostsByUser.addObject("viewerId",viewerId);
         return allPostsByUser;
-//        List<String> s= new ArrayList<>();
-//        ModelAndView allPosts= new ModelAndView();
-//        allPosts.addObject("allposts", s );
-//        return allPosts;
     }
 
     @GetMapping("/viewUserProfile")

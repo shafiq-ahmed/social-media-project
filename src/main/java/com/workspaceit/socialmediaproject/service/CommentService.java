@@ -35,6 +35,6 @@ public class CommentService {
     }
 
     public List<Comment> findAllCommentsInPost(int postId){
-        return commentDao.findByPost_Id(postId);
+        return commentDao.findByPostId(postId);
     }
 }
