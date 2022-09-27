@@ -108,6 +108,7 @@ button {
 }
 .request-btn{
   width:100%;
+  float:center;
 }
 /* Clear floats (clearfix hack) */
 
