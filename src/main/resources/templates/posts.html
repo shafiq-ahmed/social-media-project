@@ -6,9 +6,14 @@
     <title>Title</title>
 </head>
 <body>
+<form class="request-btn" th:action="@{/request/{senderId}/{receiverId}(receiverId=${userId},senderId=${viewerId})}" method="post">
+    <input class="zero" type="hidden"  name="url" th:value="@{${#httpServletRequest.requestURL}}">
+    <button type="submit">Send Friend Request</button>
+</form>
 <div id="app" th:each="post: ${allPosts}">
 
     <div class="main-info"  >
+
         <span class="name" th:text="${post.user.name} "></span>
         <h3 th:text="${post.description}"></h3>
 
