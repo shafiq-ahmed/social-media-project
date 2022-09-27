@@ -1,10 +1,14 @@
 package com.workspaceit.socialmediaproject.controller;
 
+import com.workspaceit.socialmediaproject.entity.Request;
 import com.workspaceit.socialmediaproject.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/request")
@@ -19,8 +23,12 @@ public class RequestController {
     }
 
     @GetMapping("/viewRequests/{receiverId}")
-    public ResponseEntity getAllReceivedRequests(@PathVariable int receiverId){
+    public ModelAndView getAllReceivedRequests(@PathVariable int receiverId){
       //  requestService.getAllReceivedRequests(receiverId).forEach(i-> System.out.println(i.getId()+" "+i.getStatus()));
-        return new ResponseEntity(requestService.getAllReceivedRequests(receiverId), HttpStatus.OK);
+        ModelAndView requestView= new ModelAndView();
+        requestView.setViewName("requests");
+        requestView.addObject("receivedRequests",requestService.getAllReceivedRequests(receiverId));
+
+        return requestView;
     }
 }
