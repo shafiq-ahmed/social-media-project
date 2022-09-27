@@ -30,6 +30,10 @@
             <button>View Posts</button>
         </form>
         <br>
+        <form class="login-form" th:action="@{/request/viewRequests/{receiverId}(receiverId=${userId})}"  method="get">
+            <button>View Friend Requests</button>
+        </form>
+        <br>
         <form class="login-form" th:action="@{/logout}"  method="get">
             <button>Logout</button>
         </form>
