@@ -37,7 +37,13 @@ public class RequestService {
     }
 
     public void updateRequestStatus(int requestId, RequestStatus selectedStatus){
+        if(selectedStatus==RequestStatus.REJECTED){
+            requestDao.deleteById(requestId);
+        }
+
        Request request= requestDao.getReferenceById(requestId);
+
+
        request.setStatus(selectedStatus);
        requestDao.save(request);
        if(selectedStatus==RequestStatus.ACCEPTED){
@@ -53,6 +59,10 @@ public class RequestService {
             }
         }
         return true;
+    }
+    public void deleteRequest(int requestId) {
+        requestDao.deleteById(requestId);
+
     }
 
 

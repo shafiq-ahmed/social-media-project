@@ -42,7 +42,7 @@ public class RequestController {
     }
     @PostMapping("/{requestId}/reject")
     public ModelAndView rejectRequest(@PathVariable int requestId, String redirectUrl){
-        requestService.updateRequestStatus(requestId, RequestStatus.REJECTED);
+        requestService.deleteRequest(requestId);
         ModelAndView requestView= new ModelAndView();
         requestView.setViewName("redirect:"+redirectUrl);
         return requestView;
