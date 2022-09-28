@@ -34,6 +34,14 @@ public class RequestService {
         return requestDao.findByReceiverIdAndStatus(receiverId, RequestStatus.PENDING);
     }
 
+    public void updateRequestStatus(int requestId, RequestStatus selectedStatus){
+       Request request= requestDao.getReferenceById(requestId);
+       request.setStatus(selectedStatus);
+       requestDao.save(request);
+    }
+
+
+
 
 }
 

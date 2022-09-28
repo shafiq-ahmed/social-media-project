@@ -15,10 +15,12 @@
 
             <span class="name" th:text="${request.sender.name} "></span>
 
-            <form th:action="@{/request/hello}"  method="get">
+            <form th:action="@{/request/{requestId}/accept(requestId=${request.id})}"  method="post">
+                <input class="zero" type="hidden"  name="redirectUrl" th:value="@{${#httpServletRequest.requestURL}}">
                 <button type="submit">Accept</button>
             </form>
-            <form th:action="@{/request/hello}"  method="get">
+            <form th:action="@{/request/{requestId}/reject(requestId=${request.id})}"  method="post">
+                <input class="zero" type="hidden"  name="redirectUrl" th:value="@{${#httpServletRequest.requestURL}}">
                 <button type="submit">Reject</button>
             </form>
 

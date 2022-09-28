@@ -1,6 +1,7 @@
 package com.workspaceit.socialmediaproject.controller;
 
 import com.workspaceit.socialmediaproject.entity.Request;
+import com.workspaceit.socialmediaproject.entity.RequestStatus;
 import com.workspaceit.socialmediaproject.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ public class RequestController {
     @Autowired
     private RequestService requestService;
 
+
     @PostMapping("/{senderId}/{receiverId}")
     public void sendRequest(@PathVariable int senderId,@PathVariable int receiverId){
         System.out.println(senderId+" "+receiverId);
@@ -29,6 +31,20 @@ public class RequestController {
         requestView.setViewName("requests");
         requestView.addObject("receivedRequests",requestService.getAllReceivedRequests(receiverId));
 
+        return requestView;
+    }
+    @PostMapping("/{requestId}/accept")
+    public ModelAndView acceptRequest(@PathVariable int requestId, String redirectUrl){
+        requestService.updateRequestStatus(requestId, RequestStatus.ACCEPTED);
+        ModelAndView requestView= new ModelAndView();
+        requestView.setViewName("redirect:"+redirectUrl);
+        return requestView;
+    }
+    @PostMapping("/{requestId}/reject")
+    public ModelAndView rejectRequest(@PathVariable int requestId, String redirectUrl){
+        requestService.updateRequestStatus(requestId, RequestStatus.REJECTED);
+        ModelAndView requestView= new ModelAndView();
+        requestView.setViewName("redirect:"+redirectUrl);
         return requestView;
     }
 }
