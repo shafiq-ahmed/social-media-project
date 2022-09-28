@@ -17,4 +17,21 @@ public class FriendsService {
         friends.setFriend(friend);
         friendsDao.save(friends);
     }
+
+    public boolean isUserFriend(int friendId, int userId){
+        Friends friends=friendsDao.findByFriendIdAndUserId(friendId,userId);
+        if(friends==null) {
+            System.out.println(false);
+            //switching ids to see if the relationship exists from opposite side
+            friends=friendsDao.findByFriendIdAndUserId(userId,friendId);
+        }
+        if(friends==null){
+            System.out.println(false);
+            return false;
+        }else {
+            System.out.println(true);
+            return true;
+        }
+
+    }
 }

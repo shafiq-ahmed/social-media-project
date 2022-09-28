@@ -2,6 +2,7 @@ package com.workspaceit.socialmediaproject.controller;
 
 import com.workspaceit.socialmediaproject.entity.Post;
 import com.workspaceit.socialmediaproject.service.CommentService;
+import com.workspaceit.socialmediaproject.service.FriendsService;
 import com.workspaceit.socialmediaproject.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ public class PostController {
     private PostService postService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private FriendsService friendsService;
 
     @GetMapping("/createpost")
     public ModelAndView createPost(@PathVariable int userId){
@@ -38,6 +41,7 @@ public class PostController {
     public ModelAndView viewPosts(@PathVariable int userId, @PathVariable int viewerId){
         ModelAndView allPostsByUser= new ModelAndView();
         allPostsByUser.setViewName("posts");
+        allPostsByUser.addObject("isFriend", friendsService.isUserFriend(userId,viewerId));
         allPostsByUser.addObject("allPosts", postService.getAllPostsFromUser(userId));
         allPostsByUser.addObject("userId",userId);
         allPostsByUser.addObject("viewerId",viewerId);

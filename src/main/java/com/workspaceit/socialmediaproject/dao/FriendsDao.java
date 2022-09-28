@@ -4,5 +4,5 @@ import com.workspaceit.socialmediaproject.entity.Friends;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FriendsDao extends JpaRepository<Friends, Integer> {
-
+    public Friends findByFriendIdAndUserId(int friendId, int userId);
 }
