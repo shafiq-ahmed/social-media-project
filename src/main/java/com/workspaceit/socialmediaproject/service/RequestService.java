@@ -45,7 +45,15 @@ public class RequestService {
        }
     }
 
-
+    public boolean requestExists(int senderId,int receiverId){
+        if(requestDao.findBySenderIdAndReceiverId(senderId, receiverId)==null){
+            //switching ids to see if request exists from opposite end
+            if(requestDao.findBySenderIdAndReceiverId(receiverId, senderId)==null){
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 }

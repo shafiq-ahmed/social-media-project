@@ -8,11 +8,13 @@
 <body>
 
 <div id="app">
-    <div th:if="${isFriend}==false">
-        <form class="request-btn" th:action="@{/request/{senderId}/{receiverId}(receiverId=${userId},senderId=${viewerId})}" method="post">
-            <input class="zero" type="hidden"  name="url" th:value="@{${#httpServletRequest.requestURL}}">
-            <button type="submit">Send Friend Request</button>
-        </form>
+    <div th:if="${isFriend}==false AND ${requestExists}==false">
+
+            <form class="request-btn" th:action="@{/request/{senderId}/{receiverId}(receiverId=${userId},senderId=${viewerId})}" method="post">
+                <input class="zero" type="hidden"  name="url" th:value="@{${#httpServletRequest.requestURL}}">
+                <button type="submit">Send Friend Request</button>
+            </form>
+
     </div>
 <div  th:each="post: ${allPosts}">
 
