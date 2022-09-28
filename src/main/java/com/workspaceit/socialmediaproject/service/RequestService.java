@@ -15,6 +15,8 @@ public class RequestService {
     private RequestDao requestDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private FriendsService friendsService;
 
     public void addRequest(int senderId, int receeiverId) {
         Request request;
@@ -38,6 +40,9 @@ public class RequestService {
        Request request= requestDao.getReferenceById(requestId);
        request.setStatus(selectedStatus);
        requestDao.save(request);
+       if(selectedStatus==RequestStatus.ACCEPTED){
+           friendsService.addFriends(request.getReceiver(),request.getSender());
+       }
     }
 
 
