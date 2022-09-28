@@ -45,6 +45,14 @@ public class PostController {
         ModelAndView allPostsByUser= new ModelAndView();
         allPostsByUser.setViewName("posts");
         allPostsByUser.addObject("requestExists",requestService.requestExists(viewerId,userId));
+        if(userId==viewerId){
+            allPostsByUser.addObject("isOwnProfile",true);
+        }else allPostsByUser.addObject("isOwnProfile",false);
+        if(friendsService.isUserFriend(userId,viewerId)){
+
+            //list of users who are mapped as friends and who are mapped as users to this userId on friends table
+            allPostsByUser.addObject("friendsList",friendsService.getFriends(userId));
+        }
         allPostsByUser.addObject("isFriend", friendsService.isUserFriend(userId,viewerId));
         allPostsByUser.addObject("allPosts", postService.getAllPostsFromUser(userId));
         allPostsByUser.addObject("userId",userId);
