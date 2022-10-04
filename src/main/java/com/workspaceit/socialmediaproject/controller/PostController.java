@@ -94,9 +94,12 @@ public class PostController {
 //        ModelAndView postView= new ModelAndView("redirect:" +"http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
 //        return postView;
 
+
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
-        return new ResponseEntity<String>(headers, HttpStatus.OK);
+        return new ResponseEntity(headers,HttpStatus.OK);
+
+
     }
 
     @GetMapping("/{postId}/reactNumber")
