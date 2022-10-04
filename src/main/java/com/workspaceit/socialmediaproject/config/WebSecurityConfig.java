@@ -45,16 +45,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeHttpRequests()
+//                .antMatchers("/user/login").permitAll()
+//                .antMatchers("/post/{userId}/{postId}/getUpvotes").permitAll()
+//                .antMatchers("/user/login/validation").permitAll()
+//                .antMatchers("/user/register").permitAll()
+//                .antMatchers("/user/addUser").permitAll()
+//                .antMatchers("/user/**").authenticated()
+//                .antMatchers("/post/**").authenticated()
+//                .antMatchers("/comment/**").authenticated()
+//                .antMatchers("/reaction/**").authenticated()
+//                .and().formLogin().defaultSuccessUrl("/user/login/validation");
+
         http.authorizeHttpRequests()
-                .antMatchers("/user/login").permitAll()
-                .antMatchers("/user/login/validation").permitAll()
-                .antMatchers("/user/register").permitAll()
-                .antMatchers("/user/addUser").permitAll()
-                .antMatchers("/user/**").authenticated()
-                .antMatchers("/post/**").authenticated()
-                .antMatchers("/comment/**").authenticated()
-                .antMatchers("/reaction/**").authenticated()
+                .antMatchers("/user/**").permitAll()
+                .antMatchers("/post/**").permitAll()
+                .antMatchers("/comment/**").permitAll()
+                .antMatchers("/reaction/**").permitAll()
                 .and().formLogin().defaultSuccessUrl("/user/login/validation");
+        http.cors().and().csrf().disable();
 
     }
 

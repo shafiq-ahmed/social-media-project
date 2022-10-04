@@ -20,7 +20,6 @@ public class RequestController {
 
     @PostMapping("/{senderId}/{receiverId}")
     public void sendRequest(@PathVariable int senderId,@PathVariable int receiverId){
-        System.out.println(senderId+" "+receiverId);
         requestService.addRequest(senderId, receiverId);
     }
 

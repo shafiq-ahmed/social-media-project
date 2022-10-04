@@ -37,9 +37,7 @@ public class RequestService {
     }
 
     public void updateRequestStatus(int requestId, RequestStatus selectedStatus){
-        if(selectedStatus==RequestStatus.REJECTED){
-            requestDao.deleteById(requestId);
-        }
+
 
        Request request= requestDao.getReferenceById(requestId);
 
