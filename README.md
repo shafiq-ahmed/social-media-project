@@ -1,14 +1,14 @@
-#Social Media
+# Social Media
 An application where users can login and browse and perform operations as they do on social media platforms
 
-##Description
+## Description
 In this application Users can choose to send friend request to other users, view the friends list of a friend and make posts and comments. This is designed to behave in a general social media like way and has basic social media features.
 
-##Used Technologies
+## Used Technologies
 - Backend: Spring Boot, Spring Security, Spring Data JPA , MySql
 - Frontend: Thymeleaf
 
-##Features
+## Features
 **1. Login/Logout authentication**
 
 Login and logout have been secured and passwords have been encrypted with Spring security
