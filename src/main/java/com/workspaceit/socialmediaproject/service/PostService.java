@@ -42,7 +42,7 @@ public class PostService {
         return 0;
     }
 
-    public List<Reaction> getNumberOfUpvotes(int postId){
-        return reactionDao.findAllByPostIdAndUserReact(postId, UserReact.UPVOTE);
+    public int getNumberOfUpvotes(int postId){
+        return reactionDao.countByPostIdAndUserReact(postId, UserReact.UPVOTE);
     }
 }

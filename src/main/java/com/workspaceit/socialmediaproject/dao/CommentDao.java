@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CommentDao extends JpaRepository<Comment, Integer> {
     List<Comment> findByPostId(int postId);
+    int countByPostId(int postId);
 }

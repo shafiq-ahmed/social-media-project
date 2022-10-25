@@ -47,16 +47,16 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/home")
-    public UserHomeWrapper getHome(@PathVariable int userId){
-//        ModelAndView homeView= new ModelAndView();
-//        homeView.addObject("userId",userId);
-//        homeView.addObject("userList",userService.getAllUsers());
-//        homeView.setViewName("home");
-//        return homeView;
-
-        UserHomeWrapper userHomeWrapper= new UserHomeWrapper();
-        userHomeWrapper.setUserId(userId);
-        userHomeWrapper.setUserList(userService.getAllUsers());
-        return userHomeWrapper;
+    public ModelAndView getHome(@PathVariable int userId){
+        ModelAndView homeView= new ModelAndView();
+        homeView.addObject("userId",userId);
+        homeView.addObject("userList",userService.getAllUsers());
+        homeView.setViewName("home");
+        return homeView;
+//
+//        UserHomeWrapper userHomeWrapper= new UserHomeWrapper();
+//        userHomeWrapper.setUserId(userId);
+//        userHomeWrapper.setUserList(userService.getAllUsers());
+//        return userHomeWrapper;
     }
 }

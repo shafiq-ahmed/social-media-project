@@ -11,4 +11,5 @@ import java.util.List;
 public interface ReactionDao extends JpaRepository<Reaction, Integer> {
     Reaction findByPostIdAndUserId(int postId, int userId);
      List<Reaction> findAllByPostIdAndUserReact(int postId, UserReact userReact);
+    int countByPostIdAndUserReact(int postId, UserReact userReact);
 }

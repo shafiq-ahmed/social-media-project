@@ -13,6 +13,24 @@ public class PostsWrapper {
     private int userId;
     private int viewerId;
     private List<Post> allPosts;
+    private int numberOfComments;
+    private int numberOfUpvotes;
+
+    public int getNumberOfComments() {
+        return numberOfComments;
+    }
+
+    public void setNumberOfComments(int numberOfComments) {
+        this.numberOfComments = numberOfComments;
+    }
+
+    public int getNumberOfUpvotes() {
+        return numberOfUpvotes;
+    }
+
+    public void setNumberOfUpvotes(int numberOfUpvotes) {
+        this.numberOfUpvotes = numberOfUpvotes;
+    }
 
     public boolean isRequestExists() {
         return requestExists;

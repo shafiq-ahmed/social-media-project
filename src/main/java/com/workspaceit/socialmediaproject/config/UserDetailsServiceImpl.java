@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Optional;
+
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -15,11 +17,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user= userDao.getReferenceById(Integer.parseInt(username));
-        if(user==null){
+        Optional<User> user = userDao.findById(Integer.parseInt(username));
+        if(user.isEmpty()){
             throw new UsernameNotFoundException("User could not be found");
         }
-        SystemUserDetails systemUserDetails= new SystemUserDetails(user);
+        SystemUserDetails systemUserDetails = new SystemUserDetails(user.get());
         return systemUserDetails;
     }
 }

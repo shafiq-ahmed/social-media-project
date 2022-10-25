@@ -37,85 +37,97 @@ public class PostController {
         return postView;
     }
     @PostMapping("/submit")
-    public ResponseEntity submitPost( Post post,@PathVariable int userId ){
+    public ModelAndView submitPost( Post post,@PathVariable int userId ){
 
-//        if(postService.postUserExists(userId)){
-//            postService.addPost(post, userId);
-//            return new ModelAndView("redirect:"+"http://localhost:9090/post/"+userId+"/posts/"+userId);
-//        }else{
-//            return new ModelAndView("error").addObject("errorMessage","User not found");
-//        }
         if(postService.postUserExists(userId)){
             postService.addPost(post, userId);
-            return  ResponseEntity.status(200).body("Post Created");
+            return new ModelAndView("redirect:"+"http://localhost:9090/post/"+userId+"/posts/"+userId);
         }else{
-            return ResponseEntity.status(400).body("User does not exist");
+            return new ModelAndView("error").addObject("errorMessage","User not found");
         }
+//        if(postService.postUserExists(userId)){
+//            postService.addPost(post, userId);
+//            return  ResponseEntity.status(200).body("Post Created");
+//        }else{
+//            return ResponseEntity.status(400).body("User does not exist");
+//        }
 
     }
 
     @GetMapping("/posts/{viewerId}")
-    public PostsWrapper viewPosts(@PathVariable int userId, @PathVariable int viewerId){
-//        ModelAndView allPostsByUser= new ModelAndView();
-//        allPostsByUser.setViewName("posts");
-//        allPostsByUser.addObject("requestExists",requestService.requestExists(viewerId,userId));
-//        if(userId==viewerId){
-//            allPostsByUser.addObject("isOwnProfile",true);
-//        }else allPostsByUser.addObject("isOwnProfile",false);
-//        if(friendsService.isUserFriend(userId,viewerId)){
-//
-//            //list of users who are mapped as friends and who are mapped as users to this userId on friends table
-//            allPostsByUser.addObject("friendsList",friendsService.getFriends(userId));
-//        }
-//        allPostsByUser.addObject("isFriend", friendsService.isUserFriend(userId,viewerId));
-//        allPostsByUser.addObject("allPosts", postService.getAllPostsFromUser(userId));
-//        allPostsByUser.addObject("userId",userId);
-//        allPostsByUser.addObject("viewerId",viewerId);
-
-        PostsWrapper postsWrapper= new PostsWrapper();
-        postsWrapper.setRequestExists(requestService.requestExists(viewerId,userId));
+    public ModelAndView viewPosts(@PathVariable int userId, @PathVariable int viewerId){
+        ModelAndView allPostsByUser= new ModelAndView();
+        allPostsByUser.setViewName("posts");
+        allPostsByUser.addObject("requestExists",requestService.requestExists(viewerId,userId));
         if(userId==viewerId){
-            postsWrapper.setOwnProfile(true);
-        }else postsWrapper.setOwnProfile(false);
+            allPostsByUser.addObject("isOwnProfile",true);
+        }else allPostsByUser.addObject("isOwnProfile",false);
         if(friendsService.isUserFriend(userId,viewerId)){
 
             //list of users who are mapped as friends and who are mapped as users to this userId on friends table
-            postsWrapper.setFriendsList(friendsService.getFriends(userId));
+            allPostsByUser.addObject("friendsList",friendsService.getFriends(userId));
         }
-        postsWrapper.setViewerId(viewerId);
-        postsWrapper.setFriend(friendsService.isUserFriend(userId,viewerId));
-        postsWrapper.setUserId(userId);
-        postsWrapper.setAllPosts(postService.getAllPostsFromUser(userId));
-        return postsWrapper;
+        allPostsByUser.addObject("isFriend", friendsService.isUserFriend(userId,viewerId));
+        allPostsByUser.addObject("allPosts", postService.getAllPostsFromUser(userId));
+        allPostsByUser.addObject("userId",userId);
+        allPostsByUser.addObject("viewerId",viewerId);
+        return allPostsByUser;
+
+//        PostsWrapper postsWrapper= new PostsWrapper();
+//        postsWrapper.setRequestExists(requestService.requestExists(viewerId,userId));
+//        if(userId==viewerId){
+//            postsWrapper.setOwnProfile(true);
+//        }else postsWrapper.setOwnProfile(false);
+//        if(friendsService.isUserFriend(userId,viewerId)){
+//
+//            //list of users who are mapped as friends and who are mapped as users to this userId on friends table
+//            postsWrapper.setFriendsList(friendsService.getFriends(userId));
+//        }
+//        postsWrapper.setViewerId(viewerId);
+//        postsWrapper.setFriend(friendsService.isUserFriend(userId,viewerId));
+//        postsWrapper.setUserId(userId);
+//        postsWrapper.setAllPosts(postService.getAllPostsFromUser(userId));
+//        return postsWrapper;
     }
 
     @GetMapping("/viewUserProfile")
-    public ResponseEntity getSelectedUserPost(@PathVariable("userId") int userId,int selectedUserId){
-//        ModelAndView postView= new ModelAndView("redirect:" +"http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
-//        return postView;
+    public ModelAndView getSelectedUserPost(@PathVariable("userId") int userId,int selectedUserId){
+        ModelAndView postView= new ModelAndView("redirect:" +"http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
+        return postView;
 
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
-        return new ResponseEntity(headers,HttpStatus.OK);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Location", "http://localhost:9090/post/"+selectedUserId+"/posts/"+userId);
+//        return new ResponseEntity(headers,HttpStatus.OK);
 
 
     }
 
+//    @GetMapping("/{postId}/reactNumber")
+//    public ReactNumberWrapper getNumberOfReacts(@PathVariable int postId){
+//
+////            ModelAndView reactNumber=new ModelAndView();
+////            reactNumber.addObject("numberOfReacts",postService.getNumberOfReacts(postId));
+////            return reactNumber;
+//
+//        ReactNumberWrapper reactNumberWrapper = new ReactNumberWrapper();
+//        reactNumberWrapper.setNumberOfReacts(postService.getNumberOfReacts(postId));
+//        return reactNumberWrapper;
+//    }
+//    @GetMapping("/{postId}/getUpvotes")
+//    public List<Reaction> getNumberOfUpvotes(@PathVariable int postId){
+//
+//        return postService.getNumberOfUpvotes(postId);
+//    }
     @GetMapping("/{postId}/reactNumber")
-    public ReactNumberWrapper getNumberOfReacts(@PathVariable int postId){
+    public PostsWrapper getCommentAndUpvoteNumber(@PathVariable int postId){
+        PostsWrapper postsWrapper= new PostsWrapper();
 
-//            ModelAndView reactNumber=new ModelAndView();
-//            reactNumber.addObject("numberOfReacts",postService.getNumberOfReacts(postId));
-//            return reactNumber;
+        postsWrapper.setNumberOfComments(commentService.getNumberOfComments(postId));
+        postsWrapper.setNumberOfUpvotes(postService.getNumberOfUpvotes(postId));
 
-        ReactNumberWrapper reactNumberWrapper = new ReactNumberWrapper();
-        reactNumberWrapper.setNumberOfReacts(postService.getNumberOfReacts(postId));
-        return reactNumberWrapper;
-    }
-    @GetMapping("/{postId}/getUpvotes")
-    public List<Reaction> getNumberOfUpvotes(@PathVariable int postId){
+        return postsWrapper;
 
-        return postService.getNumberOfUpvotes(postId);
+
     }
 }

@@ -37,4 +37,7 @@ public class CommentService {
     public List<Comment> findAllCommentsInPost(int postId){
         return commentDao.findByPostId(postId);
     }
+    public int getNumberOfComments(int postId){
+        return commentDao.countByPostId(postId);
+    }
 }

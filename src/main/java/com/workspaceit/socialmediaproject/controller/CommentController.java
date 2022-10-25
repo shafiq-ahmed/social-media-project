@@ -29,25 +29,25 @@ public class CommentController {
     }
 
     @PostMapping("/{postId}/{userId}/create")
-    public ResponseEntity createComment(@PathVariable int postId, @PathVariable int userId, Comment comment){
+    public ModelAndView createComment(@PathVariable int postId, @PathVariable int userId, Comment comment){
 
         commentService.addComment(comment,postId,userId);
         HttpHeaders headers= new HttpHeaders();
         headers.add("Location", "http://localhost:9090/comment/"+postId+"/allComments");
-        return new ResponseEntity(headers, HttpStatus.OK);
-        //return new ModelAndView("redirect:" +"http://localhost:9090/comment/"+postId+"/allComments");
+        //return new ResponseEntity(headers, HttpStatus.OK);
+        return new ModelAndView("redirect:" +"http://localhost:9090/comment/"+postId+"/allComments");
     }
 
     @GetMapping("/{postId}/allComments")
-    public CommentWrapper getAllCommentsForPost(@PathVariable int postId){
-//        ModelAndView allComments=new ModelAndView();
-//        allComments.addObject("allComments",commentService.findAllCommentsInPost(postId));
-//        allComments.setViewName("allcomments");
-//        return allComments;
-        CommentWrapper commentWrapper= new CommentWrapper();
-        commentWrapper.setCommentList(commentService.findAllCommentsInPost(postId));
-
-        return commentWrapper;
+    public ModelAndView getAllCommentsForPost(@PathVariable int postId){
+        ModelAndView allComments=new ModelAndView();
+        allComments.addObject("allComments",commentService.findAllCommentsInPost(postId));
+        allComments.setViewName("allcomments");
+        return allComments;
+//        CommentWrapper commentWrapper= new CommentWrapper();
+//        commentWrapper.setCommentList(commentService.findAllCommentsInPost(postId));
+//
+//        return commentWrapper;
 
 
     }
