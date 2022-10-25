@@ -62,7 +62,7 @@ If the user is not a friend then a send friend request option will be shown
 
 **7. View Comments**
 
-By clicking view comments anyone can view all the comments made in a post
+By clicking write comment and after creating a comment anyone can view all the comments made in a post
 
 ![alt text](Readme%20Attachments/comment.jpg)
 
