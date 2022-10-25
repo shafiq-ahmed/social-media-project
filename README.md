@@ -7,6 +7,7 @@ In this application Users can choose to send friend request to other users, view
 ## Used Technologies
 - Backend: Spring Boot, Spring Security, Spring Data JPA , MySql
 - Frontend: Thymeleaf
+- Build: Maven
 
 ## Features
 **1. Login/Logout authentication**
